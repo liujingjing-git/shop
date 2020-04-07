@@ -84,6 +84,7 @@
                     {{ csrf_field() }}
                     新密码： <input type="password" name="pass1"> <br><br>
                     确认密码：<input type="password" name="pass2"> <br><br>
+                    <input type="hidden" name="reset_token" value="{{$token}}">
                     <input type="submit" value="重置">
                 </form>
             </div>
