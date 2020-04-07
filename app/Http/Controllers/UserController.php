@@ -20,9 +20,15 @@ class UserController extends Controller
     public function regdo()
     {
         $post = request()->except('_token');
-        password_hash("pass", PASSWORD_BCRYPT);
-        
-        $res = UserModel::create($post);
+        //密码加密
+        $pass = password_hash($post['pass'],PASSWORD_BCRYPT);
+        $data = [
+            'user_name' => $post['user_name'],
+            'mobile' => $post['mobile'],
+            'email' => $post['email'],
+            'pass' => $pass,
+        ];
+        $res = UserModel::create($data);
         if($res)
         {
             echo "<script>alert('注册成功');location.href='login'</script>";
@@ -44,7 +50,7 @@ class UserController extends Controller
      */
     public function logindo()
     {
-        $post = request()->except('_token');
+        $post = request()->except('_token');        
         $where[] = [
             'user_name', '=' , $post['user_name'],
         ];
