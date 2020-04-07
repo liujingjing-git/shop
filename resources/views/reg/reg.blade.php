@@ -55,8 +55,8 @@
                     <td><input type="submit" value="注册"></td>
                 </tr>
             </table>
-                 <a href="">忘记密码了？</a> 
-
+                 <a href="{{url('findpass')}}">忘记密码了？</a>  |
+                 <a href="{{url('login')}}">已有账号? 前去登录</a> 
         </form>
 </body>
 
