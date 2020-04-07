@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\FindPass;
 use Illuminate\Http\Request;
 
 use App\Model\UserModel;
 use App\Model\FindpassModel;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -93,6 +95,18 @@ class UserController extends Controller
         echo "密码重置成功";
 
 
+
+    }
+
+    public function testMail()
+    {
+        echo __METHOD__;
+        $user = '165196778@qq.com';
+        $data = [
+            'url'   => 'https://www.baidu.com'
+        ];
+        $rs = Mail::to($user)->send(new FindPass($data));
+        var_dump($rs);
 
     }
 }
