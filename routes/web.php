@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::get('/findpass','UserController@vFindpass');     //找回密码
+Route::post('/findpass','UserController@findpass');     //找回密码
+Route::get('/resetpass','UserController@vResetpass');   //重置密码
+Route::post('/resetpass','UserController@resetpass');   //重置密码
