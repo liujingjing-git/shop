@@ -168,14 +168,20 @@ class UserController extends Controller
             'email' => $post['email'],
             'pass' => $pass,
         ];
-        $res = UserModel::create($data);
-        if($res)
-        {
-            echo "<script>alert('注册成功');location.href='login'</script>";
-        }else{
-            echo "<script>alert('注册失败');location.href='reg'</script>";
-        }
+        $res = UserModel::insertGetId($data);
+            //发送邮件
+        $url = [];
+        Mail::send('email.reg', $url, function($message){
+            $to = [
+                '1807578838@qq.com'
+            ];
+            $message->to($to)->subject("注册成功");
+        });
+
+        echo "<script>alert('注册成功');location.href='login'</script>";
     }
+
+   
 
     /**
      * 登录视图

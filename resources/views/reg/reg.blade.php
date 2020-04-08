@@ -36,19 +36,19 @@
             <table border="2">
                 <tr>
                     <td>用户名:</td>
-                    <td><input type="text" class="form-control" placeholder="用户名" required="" name="user_name"></td>
+                    <td><input type="text" class="form-control" placeholder="用户名"  name="user_name"></td>
                 </tr>
                 <tr>
                     <td>邮箱:</td>
-                    <td><input type="text" class="form-control" placeholder="邮箱" required="" name="email"></td>
+                    <td><input type="text" class="form-control" placeholder="邮箱"    name="email"></td>
                 </tr>
                 <tr>
                     <td>手机号码:</td>
-                    <td><input type="text" class="form-control" placeholder="手机号码" required="" name="mobile"></td>
+                    <td><input type="text" class="form-control" placeholder="手机号码"  name="mobile"></td>
                 </tr>
                 <tr>
                     <td>密码:</td>
-                    <td><input type="password" class="form-control" placeholder="密码" required="" name="pass"></td>
+                    <td><input type="password" class="form-control" placeholder="密码"  name="pass"></td>
                 </tr>
                 <tr>
                     <td>→</td>
@@ -59,5 +59,4 @@
                  <a href="{{url('login')}}">已有账号? 前去登录</a> 
         </form>
 </body>
-
 </html>
