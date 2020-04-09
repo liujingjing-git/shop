@@ -196,12 +196,9 @@ class UserController extends Controller
      */
     public function logindo()
     {
-        $post = request()->except('_token');
-        $where[] = ['user_name', '=' , $post['user_name']];
-        $res = UserModel::where($where)->first();
-        if($res['user_name']!==$post['user_name']){
-            echo "<script>alert('该用户不存在'),location='login'</script>";
-        }
+        $user_name = request()->input('user_name');
+        $pass = request()->input('pass');
+        $res = UserModel::where(['mobile'=>$user_name])->orWhere(['email'=>$user_name])->orWhere(['user_name'=>$user_name])->first();
         if($res){
             session(['user_name'=>$res['user_name']]);
             echo "<script>alert('登陆成功 正在跳转...'),location='personal'</script>";
