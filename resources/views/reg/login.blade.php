@@ -48,7 +48,8 @@
                 </tr>
             </table>
                  <a href="{{url('findpass')}}">忘记密码了？</a> |
-                 <a href="{{url('reg')}}">还没有账号? 前去注册</a> 
+                 <a href="{{url('reg')}}">还没有账号? 前去注册</a> |
+                 <a href="{{url('modify')}}">修改密码</a> 
         </form>
 </body>
 

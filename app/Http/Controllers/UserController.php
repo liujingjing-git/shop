@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\Model\UserModel;
-use App\Model\FindpassModel;
+use App\Model\FindpassModel as ps;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
@@ -197,36 +197,63 @@ class UserController extends Controller
     public function logindo()
     {
         $post = request()->except('_token');
-        $where[] = [
-            'user_name', '=' , $post['user_name'],
-        ];
+        $where[] = ['user_name', '=' , $post['user_name']];
         $res = UserModel::where($where)->first();
         if($res['user_name']!==$post['user_name']){
             echo "<script>alert('该用户不存在'),location='login'</script>";
         }
-        if($res['pass']!==$post['pass']){
-            echo "<script>alert('密码有误 确认后再试'),location='login'</script>";
-        }
-
         if($res){
             session(['user_name'=>$res['user_name']]);
-            echo "<script>alert('登陆成功'),location=''</script>";
+            echo "<script>alert('登陆成功 正在跳转...'),location='personal'</script>";
         }else{
             echo "<script>alert('登陆失败'),location='login'</script>";
         }
     }
 
     /**
-     * 判断用户是否登录
+     * 个人主页
      */
-    public function pan()
+    public function personal()
     {
-        //测试session是否有值
+        return view('reg.personal');
+    }
+
+    /**
+     * 修改密码
+     */
+    public function modify()
+    {
+        //判断用户是否登录
         if(session()->has('user_name')){
-            echo 1;
+            echo "<h5>已登录</h5>";
         }else{
-            echo 2;
+            echo "<script>alert('您还没有登录'),location='login';</script>";
         }
+       
+        return view('modify.modify');
+    }
+
+    /** 
+     * 执行修改
+     */
+    public function modifydo()
+    {
+        $post = request()->except('_token');   
+        if($post['pass1']!=$post['pass2'])
+        {
+            echo "<script>alert('两次密码不一致'),location='modify';</script>";
+        }
+        $pass = $post['pass1'];
+        $user_name = session('user_name');
+        $id = session('id');
+        unset($post['pass2']);
+        
+        $res = UserModel::where('user_name','=',$user_name)->update(['pass1'=>$pass]);
+        
+        if($res){
+            echo "修改成功 正在跳转至登录页面...";
+            header('refresh:2;url=/login');
+        } 
     }
     
     

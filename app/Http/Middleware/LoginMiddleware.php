@@ -17,9 +17,8 @@ class LoginMiddleware
     {
 
         //检测是否登录
-        if(res==2){
-            alert("请先去登录")
-            location.href="{{url('login')}}"
+        if(!$request->session()->has('user_name')){
+            return redirect('/login');
         }
 
         return $next($request);
