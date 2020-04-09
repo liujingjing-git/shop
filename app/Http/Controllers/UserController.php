@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\FindPass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Hash; 
 use App\Model\UserModel;
 use App\Model\FindpassModel as ps;
 use Illuminate\Support\Facades\Mail;
@@ -199,6 +199,20 @@ class UserController extends Controller
         $user_name = request()->input('user_name');
         $pass = request()->input('pass');
         $res = UserModel::where(['mobile'=>$user_name])->orWhere(['email'=>$user_name])->orWhere(['user_name'=>$user_name])->first();
+                    
+        $pass = request()->input('pass');
+        if (!Hash::check($pass, $res['pass'])) {
+            echo "<script>alert('确认密码后在登录'),location='login'</script>";die;
+        }
+        //发送邮件
+        $url = [];
+        Mail::send('email.login', $url, function($message){
+            $to = [
+                '1807578838@qq.com'
+            ];
+            $message->to($to)->subject("登陆成功");
+        });
+        
         if($res){
             session(['user_name'=>$res['user_name']]);
             echo "<script>alert('登陆成功 正在跳转...'),location='personal'</script>";
