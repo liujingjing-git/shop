@@ -4,9 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserModel extends Model
+class FindpassModel extends Model
 {
-    protected $table = 'p_users';
-    
+    protected $table = 'p_findpass';
 }
-
