@@ -173,7 +173,7 @@ class UserController extends Controller
         $url = [];
         Mail::send('email.reg', $url, function($message){
             $to = [
-                '1807578838@qq.com'
+                '3255728708@qq.com'
             ];
             $message->to($to)->subject("注册成功");
         });
